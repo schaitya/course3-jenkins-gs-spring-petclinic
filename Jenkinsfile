@@ -18,9 +18,9 @@ pipeline {
         stage("Sonar Analysis"){
             steps{
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar
-                    -Dsonar.projectName=course3-jenkins-gs-spring-petclinic
+                    -Dsonar.projectName=petclinic
                     -Dsonar.java.binaries=.\
-                    -Dsonar.projectKey=course3-jenkins-gs-spring-petclinic
+                    -Dsonar.projectKey=org.springframework.samples:spring-petclinic
                 """
             }
         }
