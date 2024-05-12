@@ -4,6 +4,7 @@ pipeline {
         
         stage("Complie Maven"){
         steps{
+                sh "pwd"
                 sh "./mvnw package"
             }
         }
