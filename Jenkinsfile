@@ -19,9 +19,6 @@ pipeline {
             steps{
                     sh "pwd"
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar
-                    -Dsonar.projectName=spring-petclinic
-                    -Dsonar.java.binaries=.\
-                    -Dsonar.projectKey=org.springframework.samples:spring-petclinic
                 """
             }
         }
