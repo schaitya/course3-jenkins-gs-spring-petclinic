@@ -18,9 +18,9 @@ pipeline {
         stage("Sonar Analysis"){
             steps{
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar
-                    -Dsonar.projectName=Petclinic
+                    -Dsonar.projectName=petclinic
                     -Dsonar.java.binaries=.\
-                    -Dsonar.projectKey=Petclinic
+                    -Dsonar.projectKey=petclinic
                 """
             }
         }
