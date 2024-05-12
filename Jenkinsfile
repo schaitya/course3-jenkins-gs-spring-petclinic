@@ -4,7 +4,7 @@ pipeline {
         
         stage("Complie Maven"){
         steps{
-        sh "./mvnw build"
+        sh "./mvnw clean"
             }
         }
     
