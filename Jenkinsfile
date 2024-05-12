@@ -5,7 +5,7 @@ pipeline {
         stage("Complie Maven"){
         steps{
                 sh "pwd"
-                sh "./mvnw package"
+                sh "./mvnw clean package"
             }
         }
     
@@ -18,7 +18,7 @@ pipeline {
         stage("Sonar Analysis"){
             steps{
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar
-                    -Dsonar.projectName=petclinic
+                    -Dsonar.projectName=spring-petclinic
                     -Dsonar.java.binaries=.\
                     -Dsonar.projectKey=org.springframework.samples:spring-petclinic
                 """
