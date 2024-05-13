@@ -2,38 +2,44 @@ pipeline {
     agent any
     stages{
         
-        stage("Complie Maven"){
+        stage("Package Maven"){
         steps{
                 sh "pwd"
                 sh "./mvnw clean package"
             }
         }
     
-        stage("Unit Testing"){
-        steps{
-                junit stdioRetention: '', testResults: '**/target/surefire-reports/TEST*.xml'
-            }
-        }
-
-        stage("Sonar Analysis"){
+        stage("Sonar Analysis and Archive Package"){
             steps{
                     sh "pwd"
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar
                 """
             }
-        }
-
-        stage("Archive Build"){
-            steps{
-                archiveArtifacts artifacts: '**/target/**.jar', followSymlinks: false
+            post{
+            success {
+                    junit stdioRetention: '', testResults: '**/target/surefire-reports/TEST*.xml'
+                    archiveArtifacts artifacts: '**/target/**.jar', followSymlinks: false
+                }
             }
         }
+
+        stage("Docker Build"){
+            steps{
+                scripts{
+                    withDockerRegistry(credentialsId: 'chaitya-docker') { 
+                        
+                    }
+                }
+            }
+        }
+
         stage("Trigger Deployment Build"){
             steps{
                 build 'cd-final-project'
             }
         }
     }
+
     post {
         always {
                  emailext body: """Hi Team,
