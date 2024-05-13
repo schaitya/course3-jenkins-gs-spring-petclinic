@@ -26,12 +26,12 @@ pipeline {
         stage("Docker Build"){
             steps{
                 sh "Ïn Docker Stage"
-                scripts{
-                    withDockerRegistry(credentialsId: 'chaitya-docker',  url: 'https://registry.hub.docker.com') { 
-                        sh "sudo docker build -f Dockerfile -t petclinic:latest ."
-                        sh "sudo docker tag petclinic:latest schaitya47/petclinic:latest"
-                        sh "sudo docker push schaitya47/petclinic:latest"
-                    }
+                // scripts{
+                //     withDockerRegistry(credentialsId: 'chaitya-docker',  url: 'https://registry.hub.docker.com') { 
+                //         sh "sudo docker build -f Dockerfile -t petclinic:latest ."
+                //         sh "sudo docker tag petclinic:latest schaitya47/petclinic:latest"
+                //         sh "sudo docker push schaitya47/petclinic:latest"
+                //     }
                 }
             }
         }
