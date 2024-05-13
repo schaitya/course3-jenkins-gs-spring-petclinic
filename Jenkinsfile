@@ -14,12 +14,14 @@ pipeline {
     
         stage("Sonar Analysis and Archive Package"){
             steps{
+                    withSonarQubeEnv(credentialsId: 'sonar1') {
                     sh "pwd"
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar"""
                     script{
                         def qg = waitForQualityGate()
                         if(qg.status != 'OK'){
                             error "Pipeline Aborted because of quality issue"
+                            }
                         }
                     }
                 }
