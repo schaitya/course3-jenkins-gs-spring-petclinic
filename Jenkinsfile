@@ -26,7 +26,7 @@ pipeline {
         stage("Docker Build"){
             steps{
                 scripts{
-                    withDockerRegistry(credentialsId: 'chaitya-docker', toolName: 'docker'){ 
+                    withDockerRegistry(url: "https://registry.hub.docker.com" credentialsId: 'chaitya-docker', toolName: 'docker'){ 
                         sh "sudo docker build -f Dockerfile -t petclinic:latest ."
                         sh "docker tag petclinic:latest schaitya47/petclinic:latest"
                         sh "docker push schaitya47/petclinic:latest"
