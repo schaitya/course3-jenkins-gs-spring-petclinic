@@ -26,7 +26,7 @@ pipeline {
         stage("Docker Build"){
             steps{
                 sh "pwd"
-                scripts{
+                script{
                     withDockerRegistry(credentialsId: 'chaitya-docker',  url: 'https://registry.hub.docker.com') { 
                         sh "sudo docker build -f Dockerfile -t petclinic:latest ."
                         sh "sudo docker tag petclinic:latest schaitya47/petclinic:latest"
