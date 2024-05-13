@@ -25,6 +25,7 @@ pipeline {
 
         stage("Docker Build"){
             steps{
+                sh "pwd"
                 sh "Ïn Docker Stage"
                 // scripts{
                 //     withDockerRegistry(credentialsId: 'chaitya-docker',  url: 'https://registry.hub.docker.com') { 
