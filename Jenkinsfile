@@ -33,7 +33,7 @@ pipeline {
                 //         sh "sudo docker tag petclinic:latest schaitya47/petclinic:latest"
                 //         sh "sudo docker push schaitya47/petclinic:latest"
                 //     }
-                }
+                //}
             }
         }
 
