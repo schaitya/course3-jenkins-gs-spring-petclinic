@@ -6,7 +6,6 @@ package org.springframework.samples.petclinic.vet;
 public class test {
 
     public static void main(String[] args) {
-        Optional<String> optional = getOptional();
         System.out.println("Hello World");
         System.out.println("Hello World");
         System.out.println("Hello World");
@@ -78,8 +77,6 @@ public class test {
         System.out.println("Hello World");
         System.out.println("Hello World");
         System.out.println("Hello World");
-        if (optional != null) { 
-          }
         
     }
 }
