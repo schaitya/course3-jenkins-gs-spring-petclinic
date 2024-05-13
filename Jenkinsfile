@@ -28,6 +28,7 @@ pipeline {
                 sh "pwd"
                 script{
                     withDockerRegistry(credentialsId: 'chaitya-docker',  url: 'https://registry.hub.docker.com') { 
+                        sh "sudo docker system info | grep -E 'Username|Registry'"
                         sh "sudo docker build -f Dockerfile -t petclinic:latest ."
                         sh "sudo docker tag petclinic:latest schaitya47/petclinic:latest"
                         sh "sudo docker push schaitya47/petclinic:latest"
