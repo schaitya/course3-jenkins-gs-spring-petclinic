@@ -21,7 +21,6 @@ pipeline {
                         }
                     }
                 }
-            }
             post{
             success {
                     junit stdioRetention: '', testResults: '**/target/surefire-reports/TEST*.xml'
