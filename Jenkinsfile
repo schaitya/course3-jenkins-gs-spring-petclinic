@@ -1,5 +1,8 @@
 pipeline {
     agent {label "main"}
+        options {
+        timeout(time: 1, unit: 'HOURS') 
+    }
     stages{
         
         stage("Package Maven"){
@@ -14,7 +17,6 @@ pipeline {
                     sh "pwd"
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar"""
                     script{
-                        timeout(time: 1, unit: 'HOURS')
                         def qg = waitForQualityGate()
                         if(qg.status != 'OK'){
                             error "Pipeline Aborted because of quality issue"
