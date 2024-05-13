@@ -13,11 +13,14 @@ pipeline {
             steps{
                     sh "pwd"
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar"""
-                    timeout(time: 1, unit: 'HOURS')
-                    def qg = waitForQualityGate()
-                    if(qg.status != 'OK'){
-                        error "Pipeline Aborted because of quality issue"
+                    script{
+                        timeout(time: 1, unit: 'HOURS')
+                        def qg = waitForQualityGate()
+                        if(qg.status != 'OK'){
+                            error "Pipeline Aborted because of quality issue"
+                        }
                     }
+                }
             }
             post{
             success {
