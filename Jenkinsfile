@@ -10,13 +10,21 @@ pipeline {
             }
         }
     
-        stage("Sonar Analysis and Archive Package"){
+        stage("Sonar Analysis"){
             steps{
                     withSonarQubeEnv(installationName:'sonar-scanner') {
                     sh "pwd"
                     sh """mvn sonar:sonar """
                     }
                 }
+            steps{
+                timeout(time: 2, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+                    }
+                }
+        }
+
+        stage("Quality Gate and Archive Package"){
             steps{
                 timeout(time: 2, unit: 'MINUTES') {
                 waitForQualityGate abortPipeline: true
