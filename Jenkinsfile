@@ -4,11 +4,11 @@ pipeline {
     stages{
         
         stage("Package Maven"){
-        steps{
+            steps{
                 sh "pwd"
                 sh "./mvnw clean package"
+                }
             }
-        }
     
         stage("Sonar Analysis"){
             steps{
@@ -17,12 +17,7 @@ pipeline {
                     sh """mvn sonar:sonar """
                     }
                 }
-            steps{
-                timeout(time: 2, unit: 'MINUTES') {
-                waitForQualityGate abortPipeline: true
-                    }
-                }
-        }
+            }
 
         stage("Quality Gate and Archive Package"){
             steps{
@@ -34,9 +29,9 @@ pipeline {
             success {
                     junit stdioRetention: '', testResults: '**/target/surefire-reports/TEST*.xml'
                     archiveArtifacts artifacts: '**/target/**.jar', followSymlinks: false
+                    }
                 }
             }
-        }
 
         stage("Docker Build"){
             steps{
