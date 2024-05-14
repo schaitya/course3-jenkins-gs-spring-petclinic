@@ -1,8 +1,6 @@
 pipeline {
-    agent {label "main"}
-        options {
-        timeout(time: 1, unit: 'HOURS') 
-    }
+    agent {label "main"} 
+
     stages{
         
         stage("Package Maven"){
@@ -19,6 +17,11 @@ pipeline {
                     sh """mvn sonar:sonar """
                     }
                 }
+            steps{
+                timeout(time: 2, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+                    }
+                }
             post{
             success {
                     junit stdioRetention: '', testResults: '**/target/surefire-reports/TEST*.xml'
@@ -30,7 +33,6 @@ pipeline {
         stage("Docker Build"){
             steps{
                 sh "pwd"
-                waitForQualityGate abortPipeline: true
                 script{
                     withDockerRegistry(credentialsId: '12e3ac3b-7e4e-473d-8fcf-bb60074fd35f',  url: 'https://registry.hub.docker.com') { 
                         sh "sudo docker build -f Dockerfile -t petclinic:latest ."
