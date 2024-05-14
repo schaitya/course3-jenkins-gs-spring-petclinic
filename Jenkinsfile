@@ -14,7 +14,7 @@ pipeline {
     
         stage("Sonar Analysis and Archive Package"){
             steps{
-                    withSonarQubeEnv(credentialsId: 'sonar1') {
+                    withSonarQubeEnv(credentialsId: 'sonar1' installationName:'sonar-scanner') {
                     sh "pwd"
                     sh """mvn sonar:sonar -Dsonar.url=https://localhost:9000/  -Dsonar.login=admin -Dsonar.password=sonar"""
                     script{
