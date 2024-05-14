@@ -8,7 +8,7 @@ pipeline {
         stage("Package Maven"){
         steps{
                 sh "pwd"
-                sh "./mvnw package"
+                sh "./mvnw clean package"
             }
         }
     
@@ -16,7 +16,7 @@ pipeline {
             steps{
                     withSonarQubeEnv(installationName:'sonar-scanner') {
                     sh "pwd"
-                    sh """mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar """
+                    sh """mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar """
                     script{
                         def qg = waitForQualityGate()
                         if(qg.status != 'OK'){
