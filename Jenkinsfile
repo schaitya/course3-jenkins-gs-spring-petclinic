@@ -8,7 +8,7 @@ pipeline {
         stage("Package Maven"){
         steps{
                 sh "pwd"
-                sh "./mvnw clean package"
+                sh "./mvnw package"
             }
         }
     
