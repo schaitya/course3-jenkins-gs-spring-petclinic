@@ -17,12 +17,7 @@ pipeline {
                     withSonarQubeEnv(installationName:'sonar-scanner') {
                     sh "pwd"
                     sh """mvn sonar:sonar """
-                    script{
-                        def qg = waitForQualityGate()
-                        if(qg.status != 'OK'){
-                            error "Pipeline Aborted because of quality issue"
-                            }
-                        }
+                    waitForQualityGate abortPipeline: true
                     }
                 }
             post{
