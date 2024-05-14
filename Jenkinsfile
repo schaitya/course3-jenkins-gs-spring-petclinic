@@ -16,7 +16,7 @@ pipeline {
             steps{
                     withSonarQubeEnv(installationName:'sonar-scanner') {
                     sh "pwd"
-                    sh """mvn clean sonar:sonar """
+                    sh """mvn sonar:sonar """
                     script{
                         def qg = waitForQualityGate()
                         if(qg.status != 'OK'){
