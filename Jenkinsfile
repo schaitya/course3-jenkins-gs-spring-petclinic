@@ -3,12 +3,12 @@ pipeline {
 
     stages{
         
-        // stage("Package Maven"){
-        //     steps{
-        //         sh "pwd"
-        //         sh "./mvnw clean package"
-        //         }
-        //     }
+        stage("Package Maven"){
+            steps{
+                sh "pwd"
+                sh "./mvnw clean package"
+                }
+            }
     
         stage("Sonar Analysis"){
             steps{
